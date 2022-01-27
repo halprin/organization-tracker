@@ -1,7 +1,7 @@
 const { createReport } = require('./src/usecases/createReport')
 const { argv } = require('process');
 
-const organizationName = argv[2]
-const githubPersonalAccessToken = argv[3]
+const organization = argv[2]
+const credentials = argv[3]
 
-createReport({organizationName, githubPersonalAccessToken})
+createReport({organization, credentials})

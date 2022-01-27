@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/halprin/organization-tracker/issues"
   },
-  "homepage": "https://github.com/halprin/organization-tracker#readme"
+  "homepage": "https://github.com/halprin/organization-tracker#readme",
+  "dependencies": {
+    "axios": "^0.25.0"
+  }
 }
