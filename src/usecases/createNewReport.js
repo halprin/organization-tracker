@@ -1,7 +1,7 @@
 const { githubOrganizationProvider } = require('../external/organizationProviders/github')
 const { writeOutToCsv } = require('../external/spreadsheetProviders/csv')
 
-const createReport = async ({organization, credentials}) => {
+const createNewReport = async ({organization, credentials}) => {
     console.log(`Getting user information for organization ${organization}`);
 
     const userInformation = await githubOrganizationProvider({organization, credentials});
@@ -10,5 +10,5 @@ const createReport = async ({organization, credentials}) => {
 };
 
 module.exports = {
-    createReport,
+    createNewReport,
 };

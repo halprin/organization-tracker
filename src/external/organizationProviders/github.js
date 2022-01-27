@@ -6,7 +6,7 @@ Returns an array of {username, name}
 const githubOrganizationProvider = async ({organization, credentials}) => {
     let currentUserList = [];
     let totalUserList = [];
-    let pageNumber = 4;
+    let pageNumber = 1;
 
     do {
         currentUserList = await getPageOfUsers(organization, pageNumber, credentials);
