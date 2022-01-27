@@ -1,5 +1,7 @@
 # organization-tracker
 
+Generate reports on users and their names for organizations.
+
 ## Run
 
 ```shell
