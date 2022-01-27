@@ -6,7 +6,11 @@ const createNewReport = async ({organization, credentials}) => {
 
     const userInformation = await githubOrganizationProvider({organization, credentials});
 
+    console.log('Got user information');
+
     await writeOutToCsv(userInformation);
+
+    console.log('Wrote out user information to userInformation.csv');
 };
 
 module.exports = {
