@@ -8,6 +8,8 @@ const createNewReport = async ({organization, credentials}) => {
 
     console.log('Got user information');
 
+    console.log('Writing out user information to userInformation.csv');
+
     await writeOutToCsv(userInformation);
 
     console.log('Wrote out user information to userInformation.csv');

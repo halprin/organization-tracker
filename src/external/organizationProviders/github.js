@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 /*
-Returns an array of {username, name}
+Returns an object of {username: name, ...}
  */
 const githubOrganizationProvider = async ({organization, credentials}) => {
     let currentUserList = [];
@@ -14,11 +14,12 @@ const githubOrganizationProvider = async ({organization, credentials}) => {
         pageNumber++;
     } while(currentUserList.length > 0);
 
+    const rawUserInformation = await Promise.all(totalUserList.map(user => user.url).map(async url => getGitHubUser(url, credentials)));
 
-    const userInformation = await Promise.all(totalUserList.map(user => user.url).map(async url => getGitHubUser(url, credentials)).map(async userPromise => {
-        const user = await userPromise;
-        return {'username': user.login, 'name': user.name};
-    }));
+    let userInformation = {};
+    rawUserInformation.forEach(user => {
+        userInformation[user.login] = user.name;
+    });
 
     return userInformation;
 }
