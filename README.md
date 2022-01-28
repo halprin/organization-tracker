@@ -4,8 +4,16 @@ Generate reports on users and their names for organizations.
 
 ## Run
 
+To create a new report, run...
+
 ```shell
 $ node index.js <GitHub organization> <GitHub personal access token>
+```
+
+To update an existing report, run...
+
+```shell
+$ node index.js <GitHub organization> <GitHub personal access token> <path to previously created report>
 ```
 
 ## Credentialing
