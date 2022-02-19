@@ -1,11 +1,10 @@
 const { githubOrganizationProvider } = require('../external/organizationProviders/github')
-const { readInCsv, writeOutToCsv } = require('../external/spreadsheetProviders/csv')
 const { readInGoogle, writeOutToGoogle } = require('../external/spreadsheetProviders/google')
 
-const updateReport = async ({organization, report, credentials}) => {
+const updateReport = async (organization) => {
     console.log(`Getting user information for organization ${organization}`);
 
-    const freshUserInformation = await githubOrganizationProvider({organization, credentials});
+    const freshUserInformation = await githubOrganizationProvider(organization);
 
     console.log('Got user information');
 

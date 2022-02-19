@@ -1,9 +1,13 @@
+const { env } = require('process');
 const axios = require('axios');
 
 /*
 Returns an object of {username: name, ...}
  */
-const githubOrganizationProvider = async ({organization, credentials}) => {
+const githubOrganizationProvider = async (organization) => {
+
+    const credentials = env['GITHUB_CREDENTIALS'];
+
     let currentUserList = [];
     let totalUserList = [];
     let pageNumber = 1;

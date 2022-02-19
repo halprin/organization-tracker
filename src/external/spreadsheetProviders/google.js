@@ -65,7 +65,7 @@ const readRange = async (spreadsheetId, range, sheets) => {
 const createSheetsService = async () => {
     const base64Credentials = env['GOOGLE_CREDENTIALS'];
 
-    const credentials = JSON.parse(new Buffer(base64Credentials, 'base64').toString());
+    const credentials = JSON.parse(Buffer.from(base64Credentials, 'base64').toString());
 
     const auth = new google.auth.GoogleAuth({
         credentials,
