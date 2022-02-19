@@ -1,5 +1,6 @@
 const { githubOrganizationProvider } = require('../external/organizationProviders/github')
 const { readInCsv, writeOutToCsv } = require('../external/spreadsheetProviders/csv')
+const { readInGoogle, writeOutToGoogle } = require('../external/spreadsheetProviders/google')
 
 const updateReport = async ({organization, report, credentials}) => {
     console.log(`Getting user information for organization ${organization}`);
@@ -8,21 +9,21 @@ const updateReport = async ({organization, report, credentials}) => {
 
     console.log('Got user information');
 
-    console.log(`Reading the ${report} report`);
+    console.log(`Reading the report`);
 
-    const reportUserInformation = await readInCsv(report);
+    const reportUserInformation = await readInGoogle();
 
-    console.log(`Finished reading the ${report} report`);
+    console.log(`Finished reading the report`);
 
     console.log('Splicing the user information');
 
     const userInformation = spliceUserInformation(freshUserInformation, reportUserInformation);
 
-    console.log('Writing out user information to userInformation.csv');
+    console.log('Writing out user information');
 
-    await writeOutToCsv(userInformation);
+    await writeOutToGoogle(userInformation);
 
-    console.log('Wrote out user information to userInformation.csv');
+    console.log('Wrote out user information');
 };
 
 const spliceUserInformation = (freshUserInformation, reportUserInformation) => {

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/halprin/organization-tracker#readme",
   "dependencies": {
     "axios": "^0.25.0",
-    "csv": "^6.0.5"
+    "csv": "^6.0.5",
+    "googleapis": "^95.0.0"
   }
 }
