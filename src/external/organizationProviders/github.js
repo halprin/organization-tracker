@@ -26,7 +26,7 @@ const githubOrganizationProvider = async (organization) => {
     });
 
     return userInformation;
-}
+};
 
 const getPageOfUsers = async (organization, pageNumber, credentials) => {
     const response = await axios.get(`https://api.github.com/orgs/${organization}/members?per_page=30&page=${pageNumber}`, {
@@ -37,7 +37,7 @@ const getPageOfUsers = async (organization, pageNumber, credentials) => {
     });
 
     return response.data;
-}
+};
 
 const getGitHubUser = async (url, credentials) => {
     const response = await axios.get(url, {
@@ -48,7 +48,7 @@ const getGitHubUser = async (url, credentials) => {
     });
 
     return response.data;
-}
+};
 
 module.exports = {
     githubOrganizationProvider,

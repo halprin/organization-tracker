@@ -3,7 +3,7 @@ const { env } = require('process');
 
 const handler = async (event, context) => {
     const organization = env['ORGANIZATION'];
-    updateReport(organization);
+    await updateReport(organization);
 };
 
 module.exports = {
