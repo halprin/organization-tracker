@@ -3,9 +3,9 @@ resource "aws_lambda_function" "lambda" {
 
   filename         = data.archive_file.lambda_zip_archive.output_path
   source_code_hash = data.archive_file.lambda_zip_archive.output_base64sha256
-  handler          = "external.lambda.index.handler"
+  handler          = "external/lambda/index.handler"
   timeout          = 10
-  memory_size      = 128
+  memory_size      = 256
   runtime          = "nodejs14.x"
 
   environment {
