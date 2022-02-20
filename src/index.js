@@ -1,4 +1,4 @@
-const { updateReport } = require('./src/usecases/updateReport')
+const { updateReport } = require('./usecases/updateReport');
 const { env } = require('process');
 
 const organization = env['ORGANIZATION'];

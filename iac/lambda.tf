@@ -3,7 +3,7 @@ resource "aws_lambda_function" "lambda" {
 
   filename         = data.archive_file.lambda_zip_archive.output_path
   source_code_hash = data.archive_file.lambda_zip_archive.output_base64sha256
-  handler          = "external.lambda.handler"
+  handler          = "external.lambda.index.handler"
   timeout          = 10
   memory_size      = 128
   runtime          = "nodejs14.x"
@@ -27,6 +27,6 @@ resource "aws_lambda_function" "lambda" {
 
 data "archive_file" "lambda_zip_archive" {
   type        = "zip"
-  source_dir = "${path.module}/../src"
+  source_dir = "${path.module}/../src/"
   output_path = "${path.module}/lambda.zip"
 }

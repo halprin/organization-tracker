@@ -1,7 +1,12 @@
 resource "aws_cloudwatch_event_rule" "every_day" {
-  name                = "once-every-day"
+  name                = "organization-tracker-once-every-day-${var.environment}"
   description         = "Fires once every day"
   schedule_expression = "rate(1 day)"
+
+  tags = {
+    project     = local.project
+    environment = var.environment
+  }
 }
 
 resource "aws_cloudwatch_event_target" "notify_lambda" {
