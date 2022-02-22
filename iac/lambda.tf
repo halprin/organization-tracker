@@ -4,7 +4,7 @@ resource "aws_lambda_function" "lambda" {
   filename         = data.archive_file.lambda_zip_archive.output_path
   source_code_hash = data.archive_file.lambda_zip_archive.output_base64sha256
   handler          = "external/lambda/index.handler"
-  timeout          = 10
+  timeout          = 20
   memory_size      = 256
   runtime          = "nodejs14.x"
 
@@ -12,6 +12,8 @@ resource "aws_lambda_function" "lambda" {
     variables = {
       ORGANIZATION       = var.organization
       GITHUB_CREDENTIALS = var.github_credentials
+      DOCKER_USERNAME    = var.docker_username
+      DOCKER_PASSWORD    = var.docker_password
       GOOGLE_SHEET_ID    = var.google_sheet_id
       GOOGLE_CREDENTIALS = var.google_credentials
     }

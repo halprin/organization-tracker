@@ -13,6 +13,16 @@ variable "github_credentials" {
   description = "A personal access token to query a GitHub organization"
 }
 
+variable "docker_username" {
+  type        = string
+  description = "A username to query a Docker Hub organization"
+}
+
+variable "docker_password" {
+  type        = string
+  description = "A password token associated with the docker_username to query a Docker Hub organization"
+}
+
 variable "google_sheet_id" {
   type        = string
   description = "The ID for the Google Sheet that the organization-tracker will modify"
