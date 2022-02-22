@@ -5,6 +5,7 @@ const axios = require('axios');
 Returns an object of {username: name, ...}
  */
 const githubOrganizationProvider = async (organization) => {
+    console.log(`Reading organization ${organization} from GitHub`);
 
     const credentials = env['GITHUB_CREDENTIALS'];
 
