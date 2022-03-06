@@ -20,7 +20,10 @@ const writeSheet = async (spreadsheetId, sheetName, sheetSpecificUserInformation
     const usernames = Object.keys(sheetSpecificUserInformation);
 
     const values = usernames.map(username => {
-        const name = sheetSpecificUserInformation[username];
+        //Set the name if it exists, else force it to an empty string
+        //If I don't set it to an empty string, then Google doesn't write overwrite what was in that cell previously.
+        //This can cause problems if a user was removed from the organization.  The symptom looks like a real name proliferate to other users.
+        const name = sheetSpecificUserInformation[username] ? sheetSpecificUserInformation[username] : '';
 
         return [username, name];
     });
@@ -74,8 +77,6 @@ const readSheetNames = async (spreadsheetId, sheets) => {
     const response = await sheets.spreadsheets.get({
         spreadsheetId,
     });
-
-    // console.log('response', response);
 
     return response.data.sheets.map(sheet => sheet.properties.title);
 };
