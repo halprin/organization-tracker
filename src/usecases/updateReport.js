@@ -7,6 +7,28 @@ const updateReport = async (organization) => {
 
     const providers = [githubOrganizationProvider, dockerOrganizationProvider];
 
+    const freshUserInformation = await getFreshUserInformationFromOrganizationProviders(organization, providers);
+
+    console.log('Got user information');
+
+    console.log(`Reading the report`);
+
+    const reportUserInformation = await readInGoogle();
+
+    console.log(`Finished reading the report`);
+
+    console.log('Splicing the user information');
+
+    const combinedUserInformation = combineAllUserInformation(freshUserInformation, reportUserInformation)
+
+    console.log('Writing out user information');
+
+    await writeOutToGoogle(combinedUserInformation);
+
+    console.log('Wrote out user information');
+};
+
+const getFreshUserInformationFromOrganizationProviders = async (organization, providers) => {
     const dispersedUserInformationPromises = providers.map(async organizationProvider => {
         const id = await organizationProvider.id();
         const userInformation = await organizationProvider.readOrganization(organization);
@@ -23,17 +45,11 @@ const updateReport = async (organization) => {
         return previousValue;
     },{});
 
-    console.log('Got user information');
+    return freshUserInformation;
+};
 
-    console.log(`Reading the report`);
-
-    const reportUserInformation = await readInGoogle();
-
-    console.log(`Finished reading the report`);
-
-    console.log('Splicing the user information');
-
-   const combinedUserInformation = Object.keys(freshUserInformation).reduce((previousValue, userInformationKey) => {
+const combineAllUserInformation = (freshUserInformation, reportUserInformation) => {
+    return Object.keys(freshUserInformation).reduce((previousValue, userInformationKey) => {
         const specificFreshUserInformation = freshUserInformation[userInformationKey];
         const specificReportUserInformation = reportUserInformation[userInformationKey] || {};  //if nothing in the report, default to an empty object
 
@@ -45,16 +61,10 @@ const updateReport = async (organization) => {
             return previousValue;
         }
 
-       previousValue[userInformationKey] = combinedUserInformation;
+        previousValue[userInformationKey] = combinedUserInformation;
 
         return previousValue;
     }, {});
-
-    console.log('Writing out user information');
-
-    await writeOutToGoogle(combinedUserInformation);
-
-    console.log('Wrote out user information');
 };
 
 const spliceUserInformation = (freshUserInformation, reportUserInformation) => {
