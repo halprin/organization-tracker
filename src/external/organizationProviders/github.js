@@ -52,5 +52,6 @@ const getGitHubUser = async (url, credentials) => {
 };
 
 module.exports = {
-    githubOrganizationProvider,
+    readOrganization: githubOrganizationProvider,
+    id: async () => 'github',
 };

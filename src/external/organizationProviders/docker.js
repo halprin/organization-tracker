@@ -61,5 +61,6 @@ const getPageOfUsers = async (organization, pageNumber, credentials) => {
 };
 
 module.exports = {
-    dockerOrganizationProvider,
+    readOrganization: dockerOrganizationProvider,
+    id: async () => 'docker',
 };
