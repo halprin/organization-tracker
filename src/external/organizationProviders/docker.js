@@ -49,6 +49,11 @@ const getPageOfUsers = async (organization, pageNumber, credentials) => {
 
         return response.data.results;
     } catch (e) {
+        if(e.response.status !== 404) {
+            //Some other error from DockerHub.  Log the error.
+            console.log('Error getting DockerHub users,', `response status=${e.response.status},`, `response body=${JSON.stringify(e.response.data)}`);
+        }
+
         //Docker API returns a 404 if not a single user would be returned given the `page_size` and `page` parameters
         //catch the error and return an empty list
         return [];
